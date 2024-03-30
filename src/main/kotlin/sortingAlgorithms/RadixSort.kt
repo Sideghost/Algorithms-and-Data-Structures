@@ -7,7 +7,7 @@ package sortingAlgorithms
  * @param array array.
  * @param radix radix.
  */
-fun <E> radixSort(array: Array<E>, radix: Int) {
+fun <E> radixSort(array: Array<E>, radix: Int): Array<E> {
 	val count = IntArray(radix)
 	val output = array
 
@@ -33,4 +33,6 @@ fun <E> radixSort(array: Array<E>, radix: Int) {
 	for (i in array.indices) {
 		array[i] = output[i]
 	}
+
+	return output
 }
