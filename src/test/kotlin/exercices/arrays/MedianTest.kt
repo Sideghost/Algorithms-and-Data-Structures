@@ -1,6 +1,5 @@
-package arrays
+package exercices.arrays
 
-import exercices.arrays.median
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

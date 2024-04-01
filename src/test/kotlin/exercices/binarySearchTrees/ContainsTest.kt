@@ -1,13 +1,12 @@
-package binarySearchTrees
+package exercices.binarySearchTrees
 
-import exercices.binarySearchTrees.contains
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class ContainsTest {
 
-	val cmp = { i1: Int, i2: Int -> i1 - i2 }
+	private val cmp = { i1: Int, i2: Int -> i1 - i2 }
 
 	@Test
 	fun contains_empty_trees() {
@@ -49,5 +48,4 @@ class ContainsTest {
 		assertTrue(contains(tree, 40, 50, cmp))
 		assertFalse(contains(tree, 51, 60, cmp))
 	}
-
 }

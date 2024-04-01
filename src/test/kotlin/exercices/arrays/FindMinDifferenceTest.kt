@@ -1,6 +1,5 @@
-package arrays
+package exercices.arrays
 
-import exercices.arrays.findMinDifference
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

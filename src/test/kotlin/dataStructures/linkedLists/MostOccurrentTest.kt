@@ -2,72 +2,66 @@ package dataStructures.linkedLists
 
 import dataStructures.heap.Node
 import exercices.linkedLists.mostOccurrent
-import java.util.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-
 class MostOccurrentTest {
 
-	val DIFFERENT_ELEMENTS = ArrayList(listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9))
-	val EQUAL_ELEMENTS = ArrayList(listOf(2, 2, 2, 2, 2, 2, 2, 2, 2, 2))
-	val SETS_OF_ELEMENTS = ArrayList(
-		listOf(
-			ArrayList(listOf(1, 2, 2, 5, 6, 6)),
-			ArrayList(listOf(0, 0, 2, 2, 6)),
-			ArrayList(listOf(6, 6, 7, 7, 7, 7, 8))
-		)
-	)
-	val TWO_SETS_OF_ELEMENTS = ArrayList(listOf(3, 3, 2, 3, 2, 2, 2, 3, 2, 2))
-
 	@Test
-	fun mostOccurrent_empty_array() {
+	fun `most occurrent on a empty array`() {
 		val array = arrayOfNulls<Node<Int>?>(10)
 		assertEquals(null, mostOccurrent(array, CMP_NATURAL_ORDER))
 	}
 
 	@Test
-	fun mostOccurrent_singleton_listsWithDifferentElements() {
+	fun `most occurrent in a singleton list with different elements`() {
 		val array = arrayOfNulls<Node<Int>?>(10)
 		var i = 0
-		for (el in DIFFERENT_ELEMENTS) {
+		for (el in differentElements) {
 			array[i++] = Node(el)
 		}
 		assertEquals(0, mostOccurrent(array, CMP_NATURAL_ORDER))
 	}
 
 	@Test
-	fun mostOccurrent_singleton_listsWithEqualElements() {
+	fun `most occurrent singleton lists with equal elements`() {
 		val array = arrayOfNulls<Node<Int>?>(10)
 		var i = 0
-		for (el in EQUAL_ELEMENTS) {
+		for (el in equalElements) {
 			array[i++] = Node(el)
 		}
 		assertEquals(2, mostOccurrent(array, CMP_NATURAL_ORDER))
 	}
 
 	@Test
-	fun mostOccurrent_singleton_WithMoreThanOneOcurrenceInDifferentLists() {
-		val array = arrayOfNulls<Node<Int>?>(TWO_SETS_OF_ELEMENTS.size)
+	fun `most occurrent singleton with more than one ocurrence in different lists`() {
+		val array = arrayOfNulls<Node<Int>?>(setOfTwoDifferentElements.size)
 		var i = 0
-		for (`in` in TWO_SETS_OF_ELEMENTS) {
+		for (`in` in setOfTwoDifferentElements) {
 			array[i++] = Node(`in`)
 		}
 		assertEquals(2, mostOccurrent(array, CMP_NATURAL_ORDER))
 	}
 
 	@Test
-	fun mostOccurrentInListsWithMoreThanOneOcurrence() {
+	fun `most occurrent in lists with more than one ocurrence`() {
 		val array = arrayOfNulls<Node<Int>?>(3)
-		initData(array, SETS_OF_ELEMENTS)
+		initData(array, setsOfElements)
 		assertEquals(6, mostOccurrent(array, CMP_NATURAL_ORDER))
 	}
 
-	private fun initData(array: Array<Node<Int>?>, arraylist: ArrayList<ArrayList<Int>>) {
-		if (array.size != arraylist.size) return
-		for (i in arraylist.indices) {
-			for (j in arraylist[i].indices.reversed()) {
-				val novo = Node(arraylist[i][j])
+
+	/**
+	 * Initializes the array with the data from the arraylist
+	 *
+	 * @param array the array to be initialized
+	 * @param arrayList the list with the data
+	 */
+	private fun initData(array: Array<Node<Int>?>, arrayList: ArrayList<ArrayList<Int>>) {
+		if (array.size != arrayList.size) return
+		for (i in arrayList.indices) {
+			for (j in arrayList[i].indices.reversed()) {
+				val novo = Node(arrayList[i][j])
 				novo.next = array[i]
 				if (array[i] != null) array[i]!!.previous = novo
 				array[i] = novo
@@ -76,17 +70,19 @@ class MostOccurrentTest {
 	}
 
 	companion object {
-		val CMP_REVERSE_ORDER = Comparator { i1: Int?, i2: Int ->
-			i2.compareTo(i1!!)
-		}
 		val CMP_NATURAL_ORDER = Comparator { i1: Int, i2: Int? ->
 			i1.compareTo(i2!!)
 		}
+
+		private val differentElements = ArrayList(listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9))
+		private val equalElements = ArrayList(listOf(2, 2, 2, 2, 2, 2, 2, 2, 2, 2))
+		private val setsOfElements = ArrayList(
+			listOf(
+				ArrayList(listOf(1, 2, 2, 5, 6, 6)),
+				ArrayList(listOf(0, 0, 2, 2, 6)),
+				ArrayList(listOf(6, 6, 7, 7, 7, 7, 8))
+			)
+		)
+		private val setOfTwoDifferentElements = ArrayList(listOf(3, 3, 2, 3, 2, 2, 2, 3, 2, 2))
 	}
 }
-
-
-
-
-
-

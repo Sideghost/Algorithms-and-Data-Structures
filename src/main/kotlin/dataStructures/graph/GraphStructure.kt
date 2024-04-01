@@ -1,32 +1,36 @@
 package dataStructures.graph
 
 /**
- * Class that implements a non-oriented Graph.
+ * Implementation of a non-oriented Graph
  */
 class GraphStructure<I, D> : Graph<I, D> {
 
 	/**
-	 * Data class that implements the Vertex on the graph.
-	 * @property data Data of a given Vertex.
-	 * @property id Identifier of a Graph.
-	 * @property edges Set of edges (aka) reference of links between Vertexes.
+	 * Vertex on the graph
+	 * @property data Data of a given Vertex
+	 * @property id Identifier of a Graph
+	 * @property edges Set of edges (aka) reference of links between Vertexes
 	 */
 	data class Vertex<I, D>(override val id: I, override var data: D) : Graph.Vertex<I, D> {
 
 		private val edges = mutableSetOf<Graph.Edge<I>?>()
 
 		/**
-		 * Function that returns a set of every adjacent Edges of a certain Vertex.
-		 * @return A set of edges, might be an empty set if there are no Edges attached to the Vertex.
+		 * Function that returns a set of every adjacent Edges of
+		 * a certain Vertex
+		 *
+		 * @return A set of edges might be an empty set if there
+		 * are no Edges attached to the Vertex
 		 */
 		override fun getAdjacencies(): MutableSet<Graph.Edge<I>?> {
 			return edges
 		}
 
 		/**
-		 * Function that replaces the data of a given Vertex.
-		 * @param newData New data to store in the Vertex.
-		 * @return The new data.
+		 * Replaces the data of a given Vertex
+		 *
+		 * @param newData New data to store in the Vertex
+		 * @return The new data
 		 */
 		override fun setData(newData: D): D {
 			data = newData
@@ -36,9 +40,10 @@ class GraphStructure<I, D> : Graph<I, D> {
 	}
 
 	/**
-	 * Class that implements an Edge of the Graph.
-	 * @property id Identifier of the origin Vertex.
-	 * @property adjacent Identifier of the destiny Vertex.
+	 * Class that implements an Edge of the Graph
+	 *
+	 * @property id Identifier of the origin Vertex
+	 * @property adjacent Identifier of the destiny Vertex
 	 */
 	data class Edge<I>(override val id: I, override val adjacent: I) : Graph.Edge<I>
 
@@ -50,11 +55,13 @@ class GraphStructure<I, D> : Graph<I, D> {
 		}
 
 	/**
-	 * Function that adds a vertex to the Graph.
-	 * If the given Vertex is already in the graph, function returns null without adding it.
-	 * @param id ID of the Vertex to add.
-	 * @param d Data of the Vertex to add.
-	 * @return The data of the new vertex or null if the vertex was already in the graph.
+	 * Adds a vertex to the Graph if the given Vertex is
+	 * already in the graph, returns null without adding it
+	 *
+	 * @param id ID of the Vertex to add
+	 * @param d Data of the Vertex to add
+	 * @return The data of the new vertex or null if
+	 * the vertex was already in the graph
 	 */
 	override fun addVertex(id: I, d: D): D? {
 		val vertex = getVertex(id)
@@ -64,11 +71,14 @@ class GraphStructure<I, D> : Graph<I, D> {
 	}
 
 	/**
-	 * Function that adds a new Edge to the Graph, identifying the origin and destiny vertices.
-	 * If the origin Vertex does not exist returns null without adding it.
-	 * @param id ID of the origin Vertex.
-	 * @param idAdj ID of the destiny Vertex.
-	 * @return The ID of the adjacent vertex or null if it doesn't exist.
+	 * Adds a new Edge to the Graph, identifying the origin
+	 * and destiny vertices.
+	 * If the origin Vertex does not exist, returns null without
+	 * adding it
+	 *
+	 * @param id ID of the origin Vertex
+	 * @param idAdj ID of the destiny Vertex
+	 * @return The ID of the adjacent vertex or null if it doesn't exist
 	 */
 	override fun addEdge(id: I, idAdj: I): I? {
 		val address = getVertex(id) ?: return null
@@ -77,19 +87,21 @@ class GraphStructure<I, D> : Graph<I, D> {
 	}
 
 	/**
-	 * Function that gets a Vertex given its ID.
-	 * @param id ID of the Vertex to search.
-	 * @return A Vertex or null if it doesn't exist in the graph.
+	 * Gets a Vertex given its ID
+	 *
+	 * @param id ID of the Vertex to search
+	 * @return A Vertex or null if it doesn't exist in the graph
 	 */
 	override fun getVertex(id: I): Graph.Vertex<I, D>? {
 		return map[id]
 	}
 
 	/**
-	 * Function that gets an Edge given its origin and destiny Vertices.
-	 * @param id ID of the origin Vertex.
-	 * @param idAdj ID of the destiny Vertex.
-	 * @return An Edge or null if it doesn't exist in the graph.
+	 * Gets an Edge given its origin and destiny Vertices
+	 *
+	 * @param id ID of the origin Vertex
+	 * @param idAdj ID of the destiny Vertex
+	 * @return An Edge or null if it doesn't exist in the graph
 	 */
 	override fun getEdge(id: I, idAdj: I): Graph.Edge<I>? {
 		val address = getVertex(id) ?: return null
@@ -100,24 +112,30 @@ class GraphStructure<I, D> : Graph<I, D> {
 	}
 
 	/**
-	 * Function that makes a HashMap of Vertex that can be iterated.
-	 * @return Returns an Iterable object that allows to iterate over the existing Vertices.
+	 * Iterates over the existing Vertices
+	 *
+	 * @return Returns an Iterable object that allows to iterate over
+	 * the existing Vertices
 	 */
 	override fun iterator(): Iterator<Graph.Vertex<I, D>> {
 		return object : Iterator<Graph.Vertex<I, D>> {
 			val iterator = map.iterator()
 
 			/**
-			 * Function that verifies if the next vertex is different from null.
-			 * @return True if there is more vertex and false if there aren't.
+			 * Verifies if the next vertex is different from null
+			 *
+			 * @return True if there is more vertex and false if there
+			 * aren't
 			 */
 			override fun hasNext(): Boolean {
 				return iterator.hasNext()
 			}
 
 			/**
-			 * Function that iterate in the map if the next vertex is different from null.
-			 * @return Next vertex or trows exception.
+			 * Iterates in the map if the next vertex is different from
+			 * null
+			 *
+			 * @return Next vertex or trows exception
 			 */
 			override fun next(): Graph.Vertex<I, D> {
 				if (!hasNext()) throw NoSuchElementException("No such Vertex")
@@ -127,8 +145,10 @@ class GraphStructure<I, D> : Graph<I, D> {
 	}
 
 	/**
-	 * Function that makes the Set of Edges iterable.
-	 * @return Returns an Iterable object that allows to iterate over the Edges.
+	 * Makes the Set of Edges iterable
+	 *
+	 * @return Returns an Iterable object that allows to iterate over
+	 * the Edges
 	 */
 	override fun edgesIterator(): Iterator<Graph.Edge<I>> {
 		return object : Iterator<Graph.Edge<I>> {
@@ -137,8 +157,10 @@ class GraphStructure<I, D> : Graph<I, D> {
 			var currentEdge: Graph.Edge<I>? = null
 
 			/**
-			 * Function that verifies if the next edge is different from null.
-			 * @return True if there is more edges and false if there aren't.
+			 * Verifies if the next edge is different from null
+			 *
+			 * @return True if there are more edges and false if
+			 * there aren't
 			 */
 			override fun hasNext(): Boolean {
 				if (currentEdge != null)
@@ -163,8 +185,9 @@ class GraphStructure<I, D> : Graph<I, D> {
 			}
 
 			/**
-			 * Function that iterate in the map if the next edge is different from null.
-			 * @return Next edge or trows exception.
+			 * Iterates in the map if the next edge is different from null
+			 *
+			 * @return Next-edge or trows exception
 			 */
 			override fun next(): Graph.Edge<I> {
 				if (!hasNext()) throw NoSuchElementException("No such edge")
