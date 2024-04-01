@@ -16,8 +16,8 @@ class HashTest {
 		val map = HashMap<Int, String>()
 		map.put(1, "aed")
 		assertEquals(1, map.size)
-		assertEquals("aed", map.get(1))
-		assertEquals(null, map.get(2))
+		assertEquals("aed", map[1])
+		assertEquals(null, map[2])
 		assertEquals(1, map.iterator().next().key)
 		assertEquals("aed", map.iterator().next().value)
 		map.remove(2)
@@ -31,12 +31,12 @@ class HashTest {
 		val map = HashMap<Int, String>()
 		map.put(1, "aed")
 		map.put(1, "aed")
-		assertEquals("aed", map.get(1))
+		assertEquals("aed", map[1])
 		map.put(1, "xpto")
 		map.put(1, "xpto")
 		assertEquals(1, map.size)
-		assertEquals("xpto", map.get(1))
-		assertEquals(null, map.get(2))
+		assertEquals("xpto", map[1])
+		assertEquals(null, map[2])
 	}
 
 	@Test
@@ -46,7 +46,7 @@ class HashTest {
 			map.put(i, "" + i)
 		}
 		assertEquals(100, map.size)
-		assertEquals("10", map.get(10))
+		assertEquals("10", map[10])
 		var it = map.iterator()
 		var list = mutableListOf<Int>()
 		while (it.hasNext()) {
