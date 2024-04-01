@@ -1,39 +1,34 @@
 package exercices.hashMap
 
-// WITHOUT USING kotlin.collections EXCEPT ArrayList
-
-//imports needed for the implementation.
 import dataStructures.hashMap.HashMap
 import dataStructures.hashMap.filter
 import kotlin.system.exitProcess
 import otherAlgorithms.cleanLine
 import otherAlgorithms.createReader
 
-
 /**
- * Class that serves as a multiplexer for [mapOfAFile] Function in [Implementation2].
+ * Class that serves as a multiplexer for [mapOfAFile] Function in [Implementation2]
  */
 private enum class Implementation2 { SameOccurrence, Similarity, AllWords }
 
 /**
- * Class that represents the number of occurrence depending on a file.
- * @property first Number that represents the number of occurrences in the first file.
- * @property second Number that represents the number of occurrences in the second file.
+ * Class that represents the number of occurrences depending on a file
+ * @property first Number that represents the number of occurrences in the first file
+ * @property second Number that represents the number of occurrences in the second file
  */
-private data class Pair<T, U>(var first: Int, var second: Int)
-
+private data class Pair(var first: Int, var second: Int)
 
 /**
- * Main Function of the program, uses Data Structures specially created for this program.
+ * The Main Function of the program, uses Data Structures specially created for this program
  * (Structure present in [dataStructures.hashMap])
  * Program that lists all words in two files,
  * checks for words with the same occurrence in two files,
  * checks for similarities of two files or
- * terminates the program.
+ * terminates the program
  */
 fun main(args: Array<String>) {
 	println("For [allWords] use the following structure (allWords)")
-	println("For [SameOccurrence] use the following structure (wordsWithTheSameOccurrence[space][nr of words])")
+	println("For [SameOccurrence] use the following structure (wordsWithTheSameOccurrence [nr of words])")
 	println("For [similarity] just type (similarity)")
 	println("For [exit] just type (exit)")
 
@@ -41,7 +36,7 @@ fun main(args: Array<String>) {
 		//reads the Standard Out Put Stream
 		val input = readln()
 		val command = input.split(" ")
-		//Files are passed as program arguments.
+		//files are passed as program arguments.
 		//val inputFiles = Array(args.maxsize) { args[it] }
 		//chooses the program option.
 		when (command[0]) {
@@ -71,25 +66,25 @@ fun main(args: Array<String>) {
 	}
 }
 
-
 /**
- *  Function that implements the [allWords] option of the program.
- *  @param fileNames Files to create a Hashmap of words and Occurrences.
- *  @return Hashmap of both files.
+ *  Implements the [allWords] option of the program
+ *
+ *  @param fileNames Files to create a Hashmap of words and Occurrences
+ *  @return Hashmap of both files
  */
-private fun allWords(fileNames: Array<String>): HashMap<String, Pair<Int, Int>> {
+private fun allWords(fileNames: Array<String>): HashMap<String, Pair> {
 	//maps the first file.
 	val mapOfFile1 = mapOfAFile(fileNames[0], option = Implementation2.AllWords)
 	//maps the second file using the fist file.
 	return mapOfAFile(fileNames[1], mapOfFile1, Implementation2.AllWords)
 }
 
-
 /**
- *  Function that prints a Hashmap.
- *  @param hashMap Hashmap to print.
+ *  Prints a Hashmap
+ *
+ *  @param hashMap Hashmap to print
  */
-private fun printOccurrences(hashMap: HashMap<String, Pair<Int, Int>>) {
+private fun printOccurrences(hashMap: HashMap<String, Pair>) {
 	//iterates through the Hashmap
 	val mapIt = hashMap.iterator()
 	//checks if the hashmap has something to print.
@@ -103,19 +98,19 @@ private fun printOccurrences(hashMap: HashMap<String, Pair<Int, Int>>) {
 	}
 }
 
-
 /**
- *  Function that creates a Hashmap of a given file
- *  @param fileName to create a buffer to read a file.
- *  @param map Map of first file if it was created.
- *  @param option Option that serves as multiplexer for make changes to the [map].
- *  @return Hashmap of [fileName] or more than one.
+ *  Creates a Hashmap of a given file
+ *
+ *  @param fileName to create a buffer to read a file
+ *  @param map Map of the first file if it was created
+ *  @param option Option that serves as multiplexer for make changes to the [map]
+ *  @return Hashmap of [fileName] or more than one
  */
 private fun mapOfAFile(
 	fileName: String,
-	map: HashMap<String, Pair<Int, Int>>? = null,
+	map: HashMap<String, Pair>? = null,
 	option: Implementation2
-): HashMap<String, Pair<Int, Int>> {
+): HashMap<String, Pair> {
 	//reader of a file.
 	val reader = createReader(fileName)
 	//current line of [reader].
@@ -134,7 +129,7 @@ private fun mapOfAFile(
 			for (i in cleanLine.indices) {
 				//current line that is being read.
 				val current = hashMap[cleanLine[i]]
-				//depending on the option it makes changes to the Hashmap.
+				//depending on the option, it makes changes to the Hashmap.
 				when (option) {
 					//in all words option it adds a word if it isn't already there.
 					Implementation2.AllWords -> {
@@ -144,7 +139,7 @@ private fun mapOfAFile(
 							//represents the fist occurrence of that word.
 							if (current == null)
 								hashMap.put(cleanLine[i], Pair(1, 0))
-							//if the word is already the Hashmap it increments its occurrence.
+							//if the word is already the Hashmap, it increments its occurrence.
 							else
 								current.first++
 							// hashMap.put(cleanLine[i], Pair(current.first + 1,0))
@@ -160,23 +155,23 @@ private fun mapOfAFile(
 							//hashMap.put(cleanLine[i], Pair(current.first, current.second+1))
 						}
 					}
-					// in same occurrence it checks if a word as the same Occurrence in both files.
+					// checks if a word as the same Occurrence in both files.
 					Implementation2.SameOccurrence -> {
-						//if a word isn't in the Hashmap it skips the word.
+						//if a word isn't in the Hashmap, it skips the word.
 						if (current == null)
 							continue
-						// if the word is present in the Hashmap it decrements the number of its occurrence.
+						// if the word is present in the Hashmap, it decrements the number of its occurrence.
 						else
 							current.second++
 						//hashMap.put(cleanLine[i],Pair(current.first,current.second + 1))
 
 					}
-					// in similarity, it checks the degree of similarity of both files.
+					// checks the degree of similarity on both files.
 					Implementation2.Similarity -> {
-						//if a word isn't present already in the Hashmap it adds the word.
+						//if a word isn't present already in the Hashmap, it adds the word.
 						if (current == null)
 							hashMap.put(cleanLine[i], Pair(0, 1))
-						// if a word is already in the Hashmap it increments the occurrence of file two.
+						// if a word is already in the Hashmap, it increments the occurrence of file two.
 						else
 							current.second++
 						// hashMap.put(cleanLine[i], Pair(current.first,current.second +1))
@@ -188,11 +183,10 @@ private fun mapOfAFile(
 	return hashMap
 }
 
-
 /**
- * Function that implements the [wordsWithTheSameOccurrence] option to the program.
- * @param files Names of the [files] to create a Hashmap.
- * @param nrOfWords Number of Occurrences to search in the Hashmap.
+ * Implements the [wordsWithTheSameOccurrence] option to the program
+ * @param files Names of the [files] to create a Hashmap
+ * @param nrOfWords Number of Occurrences to search in the Hashmap
  */
 private fun wordsWithTheSameOccurrence(files: Array<String>, nrOfWords: Int) {
 	//maps the first file.
@@ -204,11 +198,10 @@ private fun wordsWithTheSameOccurrence(files: Array<String>, nrOfWords: Int) {
 		.forEach { println(it.key) }
 }
 
-
 /**
- * Function that implements the [similarity] option to the program.
- * @param files Array of two files to check for [similarity].
- * @return Number of words that don't have the same occurrence in both [files].
+ * Implements the [similarity] option to the program
+ * @param files Array of two files to check for [similarity]
+ * @return Number of words that don't have the same occurrence in both [files]
  */
 private fun similarity(files: Array<String>): Int {
 	//maps the first file.

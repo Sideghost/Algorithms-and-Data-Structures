@@ -3,13 +3,13 @@ package exercices.linkedLists
 import dataStructures.heap.Node
 
 /**
- * Function that given two doubly-linked lists ([list1] and [list2]) without sentinel and non-circular
+ * Function that given two doubly linked lists ([list1] and [list2]) without a sentinel and non-circular
  * ordered by [cmp] comparator returns a list with the elements that are present in both lists removing
  * them in the corresponding original list.
- * @param list1 Doubly-linked list without sentinel and non-circular ordered by [cmp] comparator.
- * @param list2 Doubly-linked list without sentinel and non-circular ordered by [cmp] comparator.
+ * @param list1 Doubly linked list without sentinel and non-circular ordered by [cmp] comparator.
+ * @param list2 Doubly linked list without sentinel and non-circular ordered by [cmp] comparator.
  * @param cmp Comparator criteria.
- * @return Doubly-linked list without sentinel and non-circular that has the common occurrences of [list1] and [list2].
+ * @return Doubly linked list without sentinel and non-circular that has the common occurrences of [list1] and [list2].
  */
 fun <E> intersection(list1: Node<E>?, list2: Node<E>?, cmp: Comparator<E>): Node<E>? {
 	//new list to build
@@ -52,7 +52,7 @@ fun <E> intersection(list1: Node<E>?, list2: Node<E>?, cmp: Comparator<E>): Node
 			if (firstNode == null) {
 				//cleans the reference to the previous node.
 				aux1.previous = null
-				//puts the new node in new list.
+				//puts the new node in a new list.
 				newList = aux1
 				//puts the reference to the firsts' node of the new list.
 				firstNode = newList
@@ -68,13 +68,13 @@ fun <E> intersection(list1: Node<E>?, list2: Node<E>?, cmp: Comparator<E>): Node
 				newList?.next = aux1
 				//checks if the value of both current nodes of the lists isn't null to allow to the new list to iterate.
 				if (currentNode1?.value != null || currentNode2?.value != null) newList = newList?.next
-				//if it isn't any more values to check returns the first node.
+				//if it isn't any more values to check returns, the first node.
 				else return firstNode
 			}
 		}
-		//checks if current value of node one is higher than current value of node two to iterate current node two.
+		//checks if the current value of node one is higher than the current value of node two to iterate current node two.
 		if (cmp.compare(currentNode1?.value, currentNode2?.value) > 0) currentNode2 = currentNode2?.next
-		//checks if current value of node one is smaller than current value of node two to iterate current node one.
+		//checks if the current value of node one is smaller than the current value of node two to iterate current node one.
 		if (cmp.compare(currentNode1?.value, currentNode2?.value) < 0) currentNode1 = currentNode1?.next
 	}
 

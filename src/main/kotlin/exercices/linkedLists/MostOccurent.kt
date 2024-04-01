@@ -6,10 +6,10 @@ import dataStructures.heap.exchange
 import dataStructures.heap.minHeapify
 
 /**
- * Function that given an array ([lists]) of Doubly-linked list without sentinel and non-circular
+ * Function that given an array ([lists]) of a Doubly linked list without a sentinel and non-circular
  * ordered by [cmp] comparator returns the element that most occurred in [lists], in case of draw
  * returns the smallest element.
- * @param lists Doubly-linked list without sentinel and non-circular ordered by [cmp] comparator.
+ * @param lists Doubly linked list without sentinel and non-circular ordered by [cmp] comparator.
  * @param cmp Comparator Criteria.
  * @return Returns the element that most occurred in [lists], in case of draw returns the smallest element.
  */
@@ -53,7 +53,7 @@ fun <E> mostOccurrent(lists: Array<Node<E>?>, cmp: Comparator<E>): E? {
 		else currentCount++
 		//checks if the current cont is bigger than the best count.
 		if (currentCount > bestCount) {
-			//rewrites the best count with teh current count.
+			//rewrites the best count with the current count.
 			bestCount = currentCount
 			//writes the most occurrence value with the current value.
 			bestValue = currentValue

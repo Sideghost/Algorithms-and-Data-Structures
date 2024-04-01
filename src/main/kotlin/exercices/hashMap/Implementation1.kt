@@ -1,29 +1,25 @@
 package exercices.hashMap
 
-
-// USING kotlin.collections
 import kotlin.collections.*
 import kotlin.system.exitProcess
 import otherAlgorithms.cleanLine
 import otherAlgorithms.createReader
 
-
 /**
- * Class that serves as a multiplexer for [mapOfAFile] Function in [Implementation1].
+ * Class that serves as a multiplexer for [mapOfAFile] Function in [Implementation1]
  */
 private enum class Implementation1 { SameOccurrence, Similarity, AllWords }
 
-
 /**
- * Main Function of the program, uses Data Structures present in [kotlin.collections] and [java.util] libraries.
+ * Main Function of the program, uses Data Structures present in [kotlin.collections] and [java.util] libraries
  * Program that lists all words in two files,
  * checks for words with the same occurrence in two files,
  * checks for similarities of two files or
- * terminates the program.
+ * terminates the program
  */
 fun main(args: Array<String>) {
 	println("For [allWords] use the following structure (allWords)")
-	println("For [SameOccurrence] use the following structure (SameOccurrence[space][nr of words])")
+	println("For [SameOccurrence] use the following structure (SameOccurrence [nr of words])")
 	println("For [similarity] use the following structure (similarity)")
 	println("For [exit] just type (exit)")
 
@@ -61,11 +57,11 @@ fun main(args: Array<String>) {
 
 }
 
-
 /**
- *  Function that implements the [allWords] option of the program.
- *  @param fileNames Files to create a Hashmap of words and Occurrences.
- *  @return Hashmap of both files.
+ *  Implements the [allWords] option of the program
+ *
+ *  @param fileNames Files to create a Hashmap of words and Occurrences
+ *  @return Hashmap of both files
  */
 private fun allWords(fileNames: Array<String>): HashMap<String, Int> {
 	//maps the first file.
@@ -74,10 +70,10 @@ private fun allWords(fileNames: Array<String>): HashMap<String, Int> {
 	return mapOfAFile(fileNames[1], map, Implementation1.AllWords)
 }
 
-
 /**
- *  Function that prints a Hashmap.
- *  @param hashMap Hashmap to print.
+ *  Prints a Hashmap
+ *
+ *  @param hashMap Hashmap to print
  */
 private fun printOccurrences(hashMap: HashMap<String, Int>) {
 	//loop to go through all the entries in the Hashmap
@@ -86,9 +82,9 @@ private fun printOccurrences(hashMap: HashMap<String, Int>) {
 		println("${i.key}(${i.value})")
 }
 
-
 /**
- *  Function that creates a Hashmap of a given file
+ *  Creates a Hashmap of a given file
+ *
  *  @param fileName to create a buffer to read a file.
  *  @param map Map of the first file if it was created.
  *  @param option Option that serves as multiplexer for make changes to the [map].
@@ -115,7 +111,7 @@ private fun mapOfAFile(
 		if (cleanLine.isNotEmpty())
 		//loop to go through all words in a line.
 			for (word in cleanLine) {
-				//depending on the option it makes changes to the Hashmap.
+				//depending on the option, it makes changes to the Hashmap.
 				when (option) {
 					//in all words option it adds a word if it isn't already there.
 					Implementation1.AllWords -> {
@@ -123,26 +119,26 @@ private fun mapOfAFile(
 						//represents the fist occurrence of that word.
 						if (!hashMap.containsKey(word))
 							hashMap[word] = 1
-						//if the word is already the Hashmap it increments its occurrence.
+						//if the word is already the Hashmap, it increments its occurrence.
 						else
 							hashMap[word] = hashMap[word]!! + 1
 					}
-					// in same occurrence it checks if a word as the same Occurrence in both files.
+					// in the same occurrence it checks if a word as the same Occurrence in both files.
 					Implementation1.SameOccurrence -> {
-						//if a word isn't in the Hashmap it skips the word.
+						//if a word isn't in the Hashmap, it skips the word.
 						if (!hashMap.containsKey(word))
 							continue
-						// if the word is present in the Hashmap it decrements the number of its occurrence.
+						// if the word is present in the Hashmap, it decrements the number of its occurrence.
 						else
 							hashMap[word] = hashMap[word]!! - 1
 
 					}
 					//in similarity, it checks the degree of similarity of both files.
 					Implementation1.Similarity -> {
-						//if a word isn't present already in the Hashmap it adds the word.
+						//if a word isn't present already in the Hashmap, it adds the word.
 						if (!hashMap.containsKey(word))
 							hashMap[word] = 1
-						// if a word is already in the Hashmap it decrements the occurrence of that same word.
+						// if a word is already in the Hashmap, it decrements the occurrence of that same word.
 						else
 							hashMap[word] = hashMap[word]!! - 1
 					}
@@ -153,12 +149,12 @@ private fun mapOfAFile(
 	return hashMap
 }
 
-
 /**
- *  Function that implements the [wordsWithTheSameOccurrence] option to the program.
- *  (Only works with 2 Files).
- *  @param files Names of the [files] to create a Hashmap.
- *  @param nrOfWords Number of Occurrences to search in the Hashmap.
+ *  Implements the [wordsWithTheSameOccurrence] option to the program
+ *  (Only works with two Files)
+ *
+ *  @param files Names of the [files] to create a Hashmap
+ *  @param nrOfWords Number of Occurrences to search in the Hashmap
  */
 private fun wordsWithTheSameOccurrence(files: Array<String>, nrOfWords: Int) {
 	//maps the first file.
@@ -172,11 +168,11 @@ private fun wordsWithTheSameOccurrence(files: Array<String>, nrOfWords: Int) {
 	allFiles.filterValues { it == 0 }.forEach { println(it.key) }
 }
 
-
 /**
- * Function that implements the [similarity] option to the program.
+ * Implements the [similarity] option to the program
+ *
  * @param files Array of [files] to check for [similarity]
- * @return Number of words that don't have the same occurrence in both [files].
+ * @return Number of words that don't have the same occurrence in both [files]
  */
 private fun similarity(files: Array<String>): Int {
 	//maps the first file.
