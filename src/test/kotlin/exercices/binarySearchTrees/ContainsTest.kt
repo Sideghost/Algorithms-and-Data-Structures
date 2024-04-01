@@ -14,7 +14,6 @@ class ContainsTest {
 		assertFalse(contains(tree, 0, 3, cmp))
 	}
 
-
 	@Test
 	fun contains_singleNodeBST() {
 		val tree = singleNodeBST(1)

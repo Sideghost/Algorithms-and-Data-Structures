@@ -1,7 +1,13 @@
 package exercices.binarySearchTrees
 
-data class Node<E>(var item: E, var left: Node<E>?, var right: Node<E>?)
-
+/**
+ * Creates a binary search tree from a range of numbers
+ * Complexity O(n)
+ *
+ * @param start Int
+ * @param end Int
+ * @return Returns a binary search tree from a range of numbers
+ */
 fun createBSTFromRange(start: Int, end: Int): Node<Int>? {
 	//non-existing interval
 	if (end - start <= 0) return null

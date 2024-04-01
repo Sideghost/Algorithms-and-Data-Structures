@@ -3,10 +3,24 @@ package exercices.binarySearchTrees
 import kotlin.math.abs
 import kotlin.math.max
 
+/**
+ * Checks if a binary search tree is balanced
+ * Complexity O(n)
+ *
+ * @param root Node<E>?
+ * @return Returns true if the binary search tree is balanced
+ */
 fun <E> isBalanced(root: Node<E>?): Boolean {
 	return isBalancedAux(root) != -1
 }
 
+/**
+ * Auxiliary function to check if a binary search tree is balanced
+ * Complexity O(n)
+ *
+ * @param root Node<E>?
+ * @return Returns the height of the binary search tree or -1 if it is not balanced
+ */
 fun <E> isBalancedAux(root: Node<E>?): Int {
 	if (root == null) return 0
 	val l = isBalancedAux(root.left)
