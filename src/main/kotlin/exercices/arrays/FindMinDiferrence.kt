@@ -3,13 +3,16 @@ package exercices.arrays
 import kotlin.math.abs
 
 /**
- * Function that finds the minimal difference between 2 arrays. Complexity O(n).
- * @param elem1 IntArray.
- * @param elem2 IntArray.
- * @return Returns the minimal difference between any element in both arrays or -1 as a flag if any array is empty.
+ * Function that finds the minimal difference between two arrays
+ * Complexity O(n)
+ *
+ * @param elem1 IntArray
+ * @param elem2 IntArray
+ * @return Returns the minimal difference between any element in
+ * both arrays or -1 as a flag if any array is empty
  */
 fun findMinDifference(elem1: IntArray, elem2: IntArray): Int {
-	//if any array is empty return a flag
+	//if any array is empty, return a flag
 	if (elem1.isEmpty() || elem2.isEmpty()) return -1
 
 	//Variable initialization
@@ -39,11 +42,4 @@ fun findMinDifference(elem1: IntArray, elem2: IntArray): Int {
 
 	}
 	return bestDifference
-}
-
-fun main() {
-	println("Find Min Difference:")
-	val arrayA = intArrayOf(3, 27, 45, 68, 70, 81, 99)
-	val arrayB = intArrayOf(9, 16, 25, 35, 75, 84)
-	println("Test 1: Expected 2 -> ${findMinDifference(arrayA, arrayB)}")
 }

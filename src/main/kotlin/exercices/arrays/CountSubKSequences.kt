@@ -1,10 +1,13 @@
 package exercices.arrays
 
 /**
- * Function that calculates the number of K-Subsequences that there may be in [a] array. Complexity O(n)
- * @param a IntArray.
- * @param k K-Subsequences.
- * @return Returns the number of K-Subsequences that the [a] array has.
+ * Calculates the number of K-Subsequences that there
+ * may be in [a] array
+ * Complexity O(n)
+ *
+ * @param a IntArray
+ * @param k K-Subsequences
+ * @return Returns the number of K-Subsequences that the [a] array has
  */
 fun countSubKSequences(a: IntArray, k: Int): Int {
 	//Primer exit condition
@@ -34,11 +37,4 @@ fun countSubKSequences(a: IntArray, k: Int): Int {
 		}
 	}
 	return counter
-}
-
-fun main() {
-	println("Count Sub K-Sequences:")
-	val array = intArrayOf(1, 2, 3, 4, 1)
-	val kSequences = 3
-	println("Test 1: Expected 2 -> ${countSubKSequences(array, kSequences)}")
 }

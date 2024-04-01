@@ -1,12 +1,15 @@
 package exercices.arrays
 
 /**
- * Function that given as array segmented in [element], gives the first index of the number higher or same as
- * [element]. Complexity O(log n).
+ * Function that given as array segmented in [element],
+ * gives the first index of the number higher or same as
+ * [element].
+ * Complexity O(log n)
  *
- * @param v IntArray.
- * @param element Integer to check.
- * @return Returns the first index of the array that is higher or same as element.
+ * @param v IntArray
+ * @param element Integer to check
+ * @return Returns the first index of the array that is
+ * higher or same as an element
  */
 fun partitionPoint(v: IntArray, element: Int): Int {
 	//Variable initialization
@@ -24,10 +27,4 @@ fun partitionPoint(v: IntArray, element: Int): Int {
 	}
 
 	return l
-}
-
-fun main() {
-	println("Partition Point:")
-	val array = intArrayOf(2, 3, 1, 4, 3, 2, 5, 7, 9, 8)
-	println("Expected 7 -> ${partitionPoint(array, 6)}")
 }
