@@ -10,12 +10,8 @@ import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
-
 class IntersectionTest {
 	companion object {
-		val CMP_REVERSE_ORDER = Comparator { i1: Int?, i2: Int ->
-			i2.compareTo(i1!!)
-		}
 		val CMP_NATURAL_ORDER = Comparator { i1: Int, i2: Int? ->
 			i1.compareTo(i2!!)
 		}
@@ -111,6 +107,3 @@ class IntersectionTest {
 		assertTrue(isEmptyListWithSentinel(list2))
 	}
 }
-
-
-

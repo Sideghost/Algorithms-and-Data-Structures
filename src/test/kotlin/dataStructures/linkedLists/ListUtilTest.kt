@@ -2,21 +2,27 @@ package dataStructures.linkedLists
 
 import dataStructures.heap.Node
 
-
 fun IntProgression.toArray() =
 	IntArray(this.count()).also { forEachIndexed { index, i -> it[index] = i } }
 
 object ListUtilTest {
-	/*
-	 * For non_circular lists with no sentinel
+	// For circular lists without sentinel
+	/**
+	 * Creates an empty list without a sentinel
 	 *
+	 * @return the empty list
 	 */
-
 	fun <E> isEmptyListWithoutSentinel(list: Node<E>?): Boolean {
 		return list == null
 	}
 
-	fun getListWithoutSentinel(array: ArrayList<Int?>): Node<Int>? {
+	/**
+	 * Creates an empty list without a sentinel
+	 *
+	 * @param array the array with the values\
+	 * @return the empty list
+	 */
+	fun createDoublyListWithOutSentinel(array: ArrayList<Int?>): Node<Int>? {
 		if (array.size == 0) return null
 		val list = Node<Int>()
 		var cur: Node<Int>? = list
@@ -31,9 +37,11 @@ object ListUtilTest {
 		return list
 	}
 
-	/*
-	 * For circular lists with sentinel
+	// For circular lists with sentinel
+	/**
+	 * Creates an empty list with sentinel
 	 *
+	 * @return the empty list
 	 */
 	fun <E> emptyListWithSentinel(): Node<E> {
 		val empty = Node<E>()
@@ -42,10 +50,25 @@ object ListUtilTest {
 		return empty
 	}
 
+	/**
+	 * Checks if the empty list has a sentinel
+	 *
+	 * @param list the list to be checked
+	 * @return true if the list has a sentinel, false otherwise
+	 */
 	fun <E> isEmptyListWithSentinel(list: Node<E>?): Boolean {
 		return list!!.next == list && list.previous == list
 	}
 
+	/**
+	 * Creates a list with sentinel
+	 *
+	 * @param start the start of the list
+	 * @param length the length of the list
+	 * @param step the step of the list
+	 * @param array the array with the values
+	 * @return the list
+	 */
 	fun getList(start: Int, length: Int, step: Int, array: ArrayList<Int?>?): Node<Int> {
 		val list = emptyListWithSentinel<Int>()
 		var i = length - 1
@@ -64,6 +87,15 @@ object ListUtilTest {
 		return list
 	}
 
+	/**
+	 * Creates a list with sentinel with duplicates
+	 *
+	 * @param start the start of the list
+	 * @param length the length of the list
+	 * @param step the step of the list
+	 * @param array the array with the values
+	 * @return the list
+	 */
 	fun getListDups(start: Int, length: Int, step: Int, array: ArrayList<Int?>?): Node<Int> {
 		val list = emptyListWithSentinel<Int>()
 		var count = 1
@@ -86,19 +118,27 @@ object ListUtilTest {
 		return list
 	}
 
-	/*
+	/**
+	 * Creates a node with the value
 	 *
-	 * Generic Methods
-	 *
-	 *
+	 * @param v the value of the node
+	 * @return the node
 	 */
-	fun <E> newNode(v: E): Node<E> {
+	private fun <E> newNode(v: E): Node<E> {
 		val result = Node<E>()
 		result.value = v
 		return result
 	}
 
-	fun <E> newNode(v: E, p: Node<E>?, n: Node<E>?): Node<E> {
+	/**
+	 * Creates a node with the value, previous and next nodes
+	 *
+	 * @param v the value of the node
+	 * @param p the previous node
+	 * @param n the next node
+	 * @return the node
+	 */
+	private fun <E> newNode(v: E, p: Node<E>?, n: Node<E>?): Node<E> {
 		val result = newNode(v)
 		result.previous = p
 		result.next = n
