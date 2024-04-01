@@ -1,5 +1,13 @@
 package dataStructures.heap
 
+/**
+ * Guarantees that the [heap] maintains as a max heap
+ *
+ * @param heap heap to maintain in max heap
+ * @param rootIdx index of the largest value
+ * @param n last index of the [heap]
+ * @param cmp comparator criteria
+ */
 fun <E> maxHeapify(heap: Array<Node<E>?>, rootIdx: Int, n: Int, cmp: Comparator<E>) {
 	val l = left(rootIdx)
 	val r = right(rootIdx)
@@ -13,6 +21,12 @@ fun <E> maxHeapify(heap: Array<Node<E>?>, rootIdx: Int, n: Int, cmp: Comparator<
 	maxHeapify(heap, largest, n, cmp)
 }
 
+/**
+ * Builds a max heap from an [heap]
+ *
+ * @param heap Array to build a max heap
+ * @param cmp comparator criteria to build the max heap
+ */
 fun <E> buildMaxHeap(heap: Array<Node<E>?>, cmp: Comparator<E>) {
 	for (i in heap.size / 2 - 1 downTo 0) {
 		maxHeapify(heap, i, heap.size, cmp)

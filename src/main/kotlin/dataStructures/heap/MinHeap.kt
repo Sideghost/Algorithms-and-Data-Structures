@@ -1,12 +1,12 @@
 package dataStructures.heap
 
-
 /**
- * Function that guaranties that the [heap] maintains as a min heap.
- * @param heap heap to maintain in min heap.
- * @param rootIdx index of the smallest value.
- * @param maxIdx last index of the [heap].
- * @param cmp comparator criteria.
+ * Guaranties that the [heap] maintains as a min heap
+ *
+ * @param heap heap to maintain in min heap
+ * @param rootIdx index of the smallest value
+ * @param maxIdx last index of the [heap]
+ * @param cmp comparator criteria
  */
 fun <E> minHeapify(heap: Array<Node<E>?>, rootIdx: Int, maxIdx: Int, cmp: Comparator<E>) {
 	val l = left(rootIdx)
@@ -22,10 +22,11 @@ fun <E> minHeapify(heap: Array<Node<E>?>, rootIdx: Int, maxIdx: Int, cmp: Compar
 }
 
 /**
- * Function that creates a Minheap from an [array].
- * @param array Array to build a Minheap.
+ * Creates a Min heap from an [array]
+ *
+ * @param array Array to build a Min heap
  * @param maxIdx last index of the [array] to build the MinHeap
- * @param cmp comparator criteria to build the Min Heap.
+ * @param cmp comparator criteria to build the Min Heap
  */
 fun <E> buildMinHeap(array: Array<Node<E>?>, maxIdx: Int, cmp: Comparator<E>) {
 	for (i in maxIdx / 2 - 1 downTo 0) {
